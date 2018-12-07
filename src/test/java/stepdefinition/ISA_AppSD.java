@@ -1,8 +1,11 @@
 package stepdefinition;
 
+import cucumber.api.PendingException;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
+import framework.actions_web.BasePage;
 import framework.page_object_model_mobile_pages.ISA_App;
 import org.testng.Assert;
 
@@ -16,8 +19,10 @@ public class ISA_AppSD {
         landingPage.tapOnSkipButton();
     }
 
-    @And("^I click on favorites button$")
-    public void clickOnFavorites() { landingPage.tapOnFavorites(); }
+   @And("^I click on favorites button$")
+    public void clickOnFavorites() {
+        landingPage.tapOnFavorites();
+    }
 
     @When("^I click on menu button$")
     public void clickOnMenuButton() throws InterruptedException {
@@ -25,11 +30,28 @@ public class ISA_AppSD {
         landingPage.tapOnMainMenuButton();
     }
 
-    @Then("^I verify sidebar menu is displayed$")
+   @Then("^I verify sidebar menu is displayed$")
     public void verifySidebarMenu() {
         Assert.assertTrue(landingPage.isSideMenuBarDisplayed());
     }
 
     @Then("^I verify \"No Sessions Found\" text displayed$")
-    public void veriyNoSessionsFound() {Assert.assertTrue(landingPage.isNoSessionsFoundDisplayed());}
+    public void verifyNoSessionsFound() {
+        Assert.assertTrue(landingPage.isNoSessionsFoundDisplayed());
+   }
+
+
+    //Verify user should be able to slide right on tutorial pages
+    @Given("^I am on Splash screen of the ionic conference app$")
+    public void verifySplashScreen() throws InterruptedException {
+
+    }
+
+    @When("^I swipe right 3 times on tutorials slides$")
+    public void verifySwipeThreeTimes() throws InterruptedException { landingPage.swpieRight(); }
+
+
+    @Then("^I verify Continue button is displayed$")
+    public void verifyContinueButton() { landingPage.verifyContinue(); }
+
 }

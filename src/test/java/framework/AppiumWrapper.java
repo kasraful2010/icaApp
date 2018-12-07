@@ -32,20 +32,20 @@ public class AppiumWrapper {
         String appiumServerURL = "http://0.0.0.0:4723/wd/hub";
 
         String platformName = "android";
-        DesiredCapabilities cap = new DesiredCapabilities();
+        DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        cap.setCapability(MobileCapabilityType.APP, "/Users/tqayyum/Downloads/ionic-conference-emulator.apk");
-        cap.setCapability("appActivity", "com.applause.automation.ionicconference.MainActivity");
-        cap.setCapability("appPackage", "com.applause.automation.ionicconference");
-        cap.setCapability(MobileCapabilityType.NO_RESET, false);
-        cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 30000);
-        cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
-        cap.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
-        cap.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_2_XL_API_26");
-        cap.setCapability("avd","Pixel_2_XL_API_26_1");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_API_27");
+        capabilities.setCapability(MobileCapabilityType.NO_RESET, false);
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/asrafulkhan/Downloads/ionic-conference-emulator.apk");
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 30000);
+        capabilities.setCapability("appActivity", "com.applause.automation.ionicconference.MainActivity");
+        capabilities.setCapability("appPackage", "com.applause.automation.ionicconference");
+        capabilities.setCapability("avd","Pixel_API_27");
 
         try {
-            appiumDriver = new AndroidDriver(new URL(appiumServerURL), cap);
+            appiumDriver = new AndroidDriver(new URL(appiumServerURL), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

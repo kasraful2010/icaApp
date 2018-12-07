@@ -2,7 +2,9 @@ package framework.actions_apps;
 
 import framework.AppiumWrapper;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -85,4 +87,15 @@ public class MobileBasePage {
     protected void compare(String actualText, String expectedText) {
         Assert.assertEquals(actualText, expectedText);
     }
+
+    public void swipe (int xPress, int yPress, int xMove, int yMove) throws InterruptedException {
+
+        Thread.sleep(5000);
+        new TouchAction(AppiumWrapper.getAppiumDriver())
+                .longPress(xPress,yPress)
+                .moveTo(xMove,yMove)
+                .release().perform();
+
+    }
+
 }
