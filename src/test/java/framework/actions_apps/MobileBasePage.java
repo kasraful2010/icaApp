@@ -36,10 +36,13 @@ public class MobileBasePage {
      */
     protected void tapOn(MobileElement mobileElement) {
         try {
+            Thread.sleep(3000);
             mobileElement.click();
         } catch (NoSuchElementException e) {
             e.printStackTrace();
             throw new NoSuchElementException("Unable to locate the Element using: " + mobileElement.toString());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -61,6 +64,7 @@ public class MobileBasePage {
 
     /**
      * This method is used to verify if element is displayed
+     *
      * @param mobileElement
      * @return
      */
@@ -88,14 +92,27 @@ public class MobileBasePage {
         Assert.assertEquals(actualText, expectedText);
     }
 
-    public void swipe (int xPress, int yPress, int xMove, int yMove) throws InterruptedException {
+    public void swipe (double startPercentage, double endPercentage, double anchorPercentage) throws InterruptedException {
+        Dimension size = AppiumWrapper.getAppiumDriver().manage().window().getSize();
+        int anchor = (int) (size.width * anchorPercentage);
+        int startPoint = (int) (size.height * startPercentage);
+        int endPoint = (int) (size.height * endPercentage);
 
         Thread.sleep(5000);
         new TouchAction(AppiumWrapper.getAppiumDriver())
-                .longPress(xPress,yPress)
-                .moveTo(xMove,yMove)
+                .press(startPoint, anchor)
+                .moveTo(endPoint, anchor)
                 .release().perform();
+    }
+    protected boolean isElementEnabled(MobileElement mobileElement) {
+        try {
+            mobileElement.isEnabled();
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+            throw new NoSuchElementException("Unable to locate the Element using: " + mobileElement.toString());
+        }
 
+        return true;
     }
 
 }

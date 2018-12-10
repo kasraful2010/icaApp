@@ -30,6 +30,16 @@ public class ISA_App extends MobileBasePage {
     @AndroidFindBy(xpath = "//android.widget.Button[@content-desc='CONTINUE arrow forward ']")
     private MobileElement continueButtonText;
 
+    @AndroidFindBy(xpath = "//android.widget.Button[@content-desc='options ']")
+    private MobileElement filterButton;
+
+    @AndroidFindBy(xpath = "//android.webkit.WebView/android.view.View[@content-desc='Angular']//following-sibling::android.widget.CheckBox")
+    private MobileElement angular;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@content-desc='Reset All Filters ']")
+    private MobileElement resetButton;
+
+
     public void tapOnSkipButton() {
         tapOn(yesButton);
     }
@@ -44,18 +54,22 @@ public class ISA_App extends MobileBasePage {
 
     public boolean isNoSessionsFoundDisplayed() { return isElementDisplayed(noSessionsFoundText); }
 
-
     public void swpieRight() throws InterruptedException {
-        swipe(1000,1000, 200, 400);
-        swipe(1000,1000, 200, 400);
-        swipe(1000,1000, 200, 400);
+        for (int i = 0; i < 3; i++) {
+            swipe(0.4, 0.1, 0.7);
+        }
     }
 
     public void verifyContinue (){
         isElementDisplayed(continueButtonText);
     }
 
+    public void clickOnFilterButton() { tapOn(filterButton);}
 
+    public void clickOnAngularButton() { tapOn(angular);}
 
+    public void verifyAngularButtonIsEnabled() { isElementEnabled(angular); }
+
+    public void clickOnResetButton() { tapOn(angular);}
 }
 

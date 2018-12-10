@@ -18,3 +18,12 @@ Feature: Mobile Login Feature
     Given I am on Splash screen of the ionic conference app
     When I swipe right 3 times on tutorials slides
     Then I verify Continue button is displayed
+
+  @mobile-filter-options
+  Scenario: Verify User should be able filter options
+    Given I am on a home page of the app
+    When I click on filter button
+    And I disable "Angular" option
+    And I click on All Reset Filer button
+    Then I verify all options are enabled
+
