@@ -19,51 +19,51 @@ import util.ConfigReader;
 public class SharedSD {
 
 
-	private static ConfigReader configReader = new ConfigReader();
-	private static final String SAUCE_URL = "https://" + configReader.getSauceUsername() + ":" + configReader.getSauceKey() + "@ondemand.saucelabs.com:443/wd/hub";
-	private static WebDriver driver = null;
+    private static ConfigReader configReader = new ConfigReader();
+    private static final String SAUCE_URL = "https://" + configReader.getSauceUsername() + ":" + configReader.getSauceKey() + "@ondemand.saucelabs.com:443/wd/hub";
+    private static WebDriver driver = null;
 
-	@Before("@web")
-	public static void before() throws MalformedURLException {
+    @Before("@web")
+    public static void before() throws MalformedURLException {
 
-		if (configReader.getEnvironment().equals("local")) {
-			System.setProperty("webdriver.chrome.driver",
-					configReader.getChromeDriverPath());
-			driver = new ChromeDriver();
+        if (configReader.getEnvironment().equals("local")) {
+            System.setProperty("webdriver.chrome.driver",
+                    configReader.getChromeDriverPath());
+            driver = new ChromeDriver();
 
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		} else if (configReader.getEnvironment().equals("sauce")) {
-			DesiredCapabilities caps = null;
-			if (configReader.getSauceBrowser().equals("chrome")) {
-				caps = DesiredCapabilities.chrome();
-			} else if (configReader.getSauceBrowser().equals("firefox")) {
-				caps = DesiredCapabilities.firefox();
-			} else if (configReader.getSauceBrowser().equals("safari")) {
-				caps = DesiredCapabilities.safari();
-			} else {
-				throw new UnsupportedOperationException("Invalid Browser name");
-			}
-			caps.setCapability("platform", configReader.getPlatform());
-			caps.setCapability("version", configReader.getVersion());
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        } else if (configReader.getEnvironment().equals("sauce")) {
+            DesiredCapabilities caps = null;
+            if (configReader.getSauceBrowser().equals("chrome")) {
+                caps = DesiredCapabilities.chrome();
+            } else if (configReader.getSauceBrowser().equals("firefox")) {
+                caps = DesiredCapabilities.firefox();
+            } else if (configReader.getSauceBrowser().equals("safari")) {
+                caps = DesiredCapabilities.safari();
+            } else {
+                throw new UnsupportedOperationException("Invalid Browser name");
+            }
+            caps.setCapability("platform", configReader.getPlatform());
+            caps.setCapability("version", configReader.getVersion());
 
-			driver = new RemoteWebDriver(new URL(SAUCE_URL), caps);
+            driver = new RemoteWebDriver(new URL(SAUCE_URL), caps);
 
-		} else {
-			throw new UnsupportedOperationException("Invalid Environment name");
-		}
+        } else {
+            throw new UnsupportedOperationException("Invalid Environment name");
+        }
 
-		driver.get(configReader.getUrl());
-	}
+        driver.get(configReader.getUrl());
+    }
 
-	@After("@web")
-	public static void after() {
-		if (driver != null) {
-			driver.manage().deleteAllCookies();
-			driver.quit();
-		}
-	}
+    @After("@web")
+    public static void after() {
+        if (driver != null) {
+            driver.manage().deleteAllCookies();
+            driver.quit();
+        }
+    }
 
-	public static WebDriver getDriver() {
-		return driver;
-	}
+    public static WebDriver getDriver() {
+        return driver;
+    }
 }

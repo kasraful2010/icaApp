@@ -8,6 +8,8 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSFindBy;
 import org.openqa.selenium.Dimension;
 
+import java.util.List;
+
 
 public class ISA_App extends MobileBasePage {
 
@@ -15,10 +17,10 @@ public class ISA_App extends MobileBasePage {
     @iOSFindBy(accessibility = "yesButton")
     private MobileElement yesButton;
 
-    @AndroidFindBy(xpath= "//android.webkit.WebView/android.view.View/android.widget.Button[1]")
+    @AndroidFindBy(xpath = "//android.webkit.WebView/android.view.View/android.widget.Button[1]")
     private MobileElement mainMenu;
 
-    @AndroidFindBy(xpath= "//android.view.View[@content-desc='Menu']")
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc='Menu']")
     private MobileElement sidebarHeader;
 
     @AndroidFindBy(xpath = "//android.widget.ToggleButton[@content-desc='FAVORITES ']")
@@ -39,6 +41,9 @@ public class ISA_App extends MobileBasePage {
     @AndroidFindBy(xpath = "//android.widget.Button[@content-desc='Reset All Filters ']")
     private MobileElement resetButton;
 
+    @AndroidFindBy(xpath = "//android.webkit.WebView/android.view.View[@content-desc='Angular']//following-sibling::android.widget.CheckBox")
+    private List<MobileElement> allOptions;
+
 
     public void tapOnSkipButton() {
         tapOn(yesButton);
@@ -48,28 +53,48 @@ public class ISA_App extends MobileBasePage {
         tapOn(mainMenu);
     }
 
-    public void tapOnFavorites() { tapOn(clickOnFavorites);}
+    public void tapOnFavorites() {
+        tapOn(clickOnFavorites);
+    }
 
-    public boolean isSideMenuBarDisplayed() { return isElementDisplayed(sidebarHeader); }
+    public boolean isSideMenuBarDisplayed() {
+        return isElementDisplayed(sidebarHeader);
+    }
 
-    public boolean isNoSessionsFoundDisplayed() { return isElementDisplayed(noSessionsFoundText); }
+    public boolean isNoSessionsFoundDisplayed() {
+        return isElementDisplayed(noSessionsFoundText);
+    }
 
-    public void swpieRight() throws InterruptedException {
+    public void swipeRight() throws InterruptedException {
         for (int i = 0; i < 3; i++) {
             swipe(0.4, 0.1, 0.7);
         }
     }
 
-    public void verifyContinue (){
+    public void verifyContinue() {
         isElementDisplayed(continueButtonText);
     }
 
-    public void clickOnFilterButton() { tapOn(filterButton);}
+    public void clickOnFilterButton() {
+        tapOn(filterButton);
+    }
 
-    public void clickOnAngularButton() { tapOn(angular);}
+    public void clickOnAngularButton() {
+        tapOn(angular);
+    }
 
-    public void verifyAngularButtonIsEnabled() { isElementEnabled(angular); }
+    public void verifyAngularButtonIsEnabled() {
+        isElementEnabled(angular);
+    }
 
-    public void clickOnResetButton() { tapOn(angular);}
+    public void clickOnResetButton() {
+        tapOn(angular);
+    }
+
+    public void verifyAllButtons() {
+        MobileElementsList(allOptions);
+    }
+
+
 }
 

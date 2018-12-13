@@ -42,34 +42,49 @@ public class ISA_AppSD {
 
 
     //Verify user should be able to slide right on tutorial pages
+
     @Given("^I am on Splash screen of the ionic conference app$")
-    public void verifySplashScreen() throws InterruptedException { }
+    public void verifySplashScreen() throws InterruptedException {
+    }
 
     @When("^I swipe right 3 times on tutorials slides$")
     public void verifySwipeThreeTimes() throws InterruptedException {
-        landingPage.swpieRight();
+        landingPage.swipeRight();
     }
 
 
     @Then("^I verify Continue button is displayed$")
-    public void verifyContinueButton() { landingPage.verifyContinue(); }
+    public void verifyContinueButton() {
+        landingPage.verifyContinue();
+    }
 
     //verify User should be able filter options
+
     @Given("^I am on a home page of the app$")
-    public void verifyHomePage() { landingPage.tapOnSkipButton(); }
+    public void verifyHomePage() {
+        landingPage.tapOnSkipButton();
+    }
 
     @When("^I click on filter button$")
-    public void verifyFilterButton() { landingPage.clickOnFilterButton();
-    landingPage.clickOnAngularButton();}
+    public void verifyFilterButton() {
+        landingPage.clickOnFilterButton();
+        landingPage.clickOnAngularButton();
+    }
 
     @And("^I disable \"Angular\" option$")
-    public void verifyOption() { landingPage.verifyAngularButtonIsEnabled();}
+    public void verifyOption() {
+        landingPage.verifyAngularButtonIsEnabled();
+    }
 
     @And("^I click on All Reset Filer button$")
-    public void verifyResetFilterButton() { landingPage.clickOnResetButton();}
+    public void verifyResetFilterButton() {
+        landingPage.clickOnResetButton();
+    }
 
     @Then("^I verify all options are enabled$")
-    public void verifyOptionsEnabled() { }
+    public void verifyOptionsEnabled() {
+        landingPage.verifyAllButtons();
+    }
 
 
 }

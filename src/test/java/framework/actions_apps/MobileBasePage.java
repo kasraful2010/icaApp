@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import stepdefinition.SharedSD;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MobileBasePage {
@@ -92,7 +93,7 @@ public class MobileBasePage {
         Assert.assertEquals(actualText, expectedText);
     }
 
-    public void swipe (double startPercentage, double endPercentage, double anchorPercentage) throws InterruptedException {
+    public void swipe(double startPercentage, double endPercentage, double anchorPercentage) throws InterruptedException {
         Dimension size = AppiumWrapper.getAppiumDriver().manage().window().getSize();
         int anchor = (int) (size.width * anchorPercentage);
         int startPoint = (int) (size.height * startPercentage);
@@ -104,6 +105,7 @@ public class MobileBasePage {
                 .moveTo(endPoint, anchor)
                 .release().perform();
     }
+
     protected boolean isElementEnabled(MobileElement mobileElement) {
         try {
             mobileElement.isEnabled();
@@ -113,6 +115,21 @@ public class MobileBasePage {
         }
 
         return true;
+    }
+
+
+    public void MobileElementsList(List<MobileElement> allOptions) {
+        List<MobileElement> options = allOptions;
+        for (MobileElement option : options) {
+            System.out.println(option.getTagName());
+
+            if (option.isSelected()) {
+                break;
+
+            }
+        }
+
+
     }
 
 }
